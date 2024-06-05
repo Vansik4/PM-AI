@@ -1,1 +1,263 @@
-{"Risk":[{"Impact":"High","Risk Id":"43","Description":"Demora en la conexión a los Sistemas para la extracción de los datos y acceso a la instancia de Celonis","Probability":"Highly likely","Risk/Stopper Status":"Materialized risk"}],"Task":[{"Sprint":"Sprint 1","Task id":"4","Star Date":1717200000000,"Finish Date":1717977600000,"Task Status":"In progress","Task/Activity":"Preparación PPT workshop técnico","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Jhoec Camayo"},{"Sprint":"Sprint 1","Task id":"5","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Presentación workshop técnico","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Jhoec Camayo"},{"Sprint":"Sprint 2","Task id":"7","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Compartir al cliente los Requisitos para conexión SAP y ServiceNow","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Andres Olarte"},{"Sprint":"Sprint 2","Task id":"9","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Análisis e Identificación de fuentes de datos ServiceNow","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Jhoec Camayo"},{"Sprint":"Sprint 1","Task id":"1","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Preparación KOM de negocio","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"María Paula Campos"},{"Sprint":"Sprint 1","Task id":"2","Star Date":1717200000000,"Finish Date":1717977600000,"Task Status":"In progress","Task/Activity":"Presentación KOM de negocio","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"María Paula Campos"},{"Sprint":"Sprint 1","Task id":"3","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Documento descripción casos de uso","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"María Paula Campos"},{"Sprint":"Sprint 2","Task id":"10","Star Date":1717200000000,"Finish Date":1717977600000,"Task Status":"In progress","Task/Activity":"Ajustes a Conexiones ","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Andres Olarte"},{"Sprint":"Sprint 2","Task id":"11","Star Date":1717200000000,"Finish Date":1717718400000,"Task Status":"In progress","Task/Activity":"Instalación e Interfaces a fuentes de datos (SAP & ServiceNow)","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Andres Olarte"},{"Sprint":"Sprint 2","Task id":"15","Star Date":1717200000000,"Finish Date":1717804800000,"Task Status":"Completed","Task/Activity":"Creación Modelo de Datos Analítico Multidimensional","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Andres Olarte"},{"Sprint":"Sprint 1","Task id":"6","Star Date":1717200000000,"Finish Date":1717977600000,"Task Status":"Completed","Task/Activity":"Confirmación casos de uso ","Assignment type":"Grupo Minero Mexico","Real finished date":null,"Responsible for the task":"Rogelio - Cliente"},{"Sprint":"Sprint 2","Task id":"8","Star Date":1717200000000,"Finish Date":1717977600000,"Task Status":"Completed","Task/Activity":"Análisis e Identificación de fuentes de datos SAP ECC, SAP SRM, ARIBA","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Jhoec Camayo"},{"Sprint":"Sprint 2","Task id":"12","Star Date":1717200000000,"Finish Date":1717459200000,"Task Status":"In progress","Task/Activity":"Extracción de datos","Assignment type":"OFI","Real finished date":null,"Responsible for the task":"Andres Olarte"},{"Sprint":"Sprint 2","Task id":"13","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Workshop de Negocio - Caso de Uso 1 & 2","Assignment type":"OFI","Real finished date":1700524800000,"Responsible for the task":"Andres Olarte"},{"Sprint":"Sprint 2","Task id":"14","Star Date":1717200000000,"Finish Date":1717372800000,"Task Status":"Overdue","Task/Activity":"Workshop de Negocio - Caso de Uso 3 & 4","Assignment type":"OFI","Real finished date":1700784000000,"Responsible for the task":"Andres Olarte"}]}
+{  "project_name": "AMERICAS MINING CORPORATION",
+   "start_date": "2024-06-01",
+   "estimated_end_date": "2024-06-15",
+   "Risk":[
+      {
+         "Impact":"High",
+         "Risk Id":"43",
+         "Description":"Demora en la conexión a los Sistemas para la extracción de los datos y acceso a la instancia de Celonis",
+         "Probability":"Highly likely",
+         "Risk/Stopper Status":"Materialized risk"
+      },
+      {
+         "Impact":"High",
+         "Risk Id":"71",
+         "Description":"Incumplimiento de Normativas y Regulaciones",
+         "Probability":"Likely",
+         "Risk/Stopper Status":"Mitigated risk"
+      },
+      {
+         "Impact":"Medium",
+         "Risk Id":"76",
+         "Description":"Problemas de Calidad del Producto o Servicio",
+         "Probability":"Likely",
+         "Risk/Stopper Status":"Mitigated risk"
+      },
+      {
+         "Impact":"High",
+         "Risk Id":"93",
+         "Description":"Fallo del Proveedor de Servicios Cloud",
+         "Probability":"Highly likely",
+         "Risk/Stopper Status":"Materialized risk"
+      },
+      {
+         "Impact":"Medium",
+         "Risk Id":"98",
+         "Description":"Fuga de Talento Clave",
+         "Probability":"Not at all likely",
+         "Risk/Stopper Status":"Mitigated risk"
+      }
+   ],
+   "Task":[
+      {
+         "Sprint":"Sprint 4",
+         "Task id":"22",
+         "Star Date":"2024-06-02",
+         "Finish Date":"2024-06-05",
+         "Task Status":"In progress",
+         "Task/Activity":"Construcción Dashboards y Análisis de Causa Raíz",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 4",
+         "Task id":"37",
+         "Star Date":"2024-06-05",
+         "Finish Date":"2024-06-05",
+         "Task Status":"Stopped",
+         "Task/Activity":"Construir análisis de variación de precios por material",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Marlon Arenas"
+      },
+      {
+         "Sprint":"Sprint 4",
+         "Task id":"40",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-03",
+         "Task Status":"Completed",
+         "Task/Activity":"Construir un asistente virtual para el proceso de invoices ",
+         "Assignment type":"OFI",
+         "Real finished date":"2024-06-04",
+         "Responsible for the task":"Jhoec Camayo"
+      },
+      {
+         "Sprint":"Sprint 4",
+         "Task id":"51",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-01",
+         "Task Status":"Completed",
+         "Task/Activity":"Prospectar clientes para campana virtual",
+         "Assignment type":"OFI",
+         "Real finished date":"2024-06-01",
+         "Responsible for the task":"Marlon Arenas"
+      },
+      {
+         "Sprint":"Sprint 2",
+         "Task id":"16",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-05",
+         "Task Status":"In progress",
+         "Task/Activity":"Construcción Modelo de Datos Analítico (Validación de datos actividades, flujos, tablas, y ajustes transformaciones)",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 1",
+         "Task id":"4",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-10",
+         "Task Status":"In progress",
+         "Task/Activity":"Preparación PPT workshop técnico",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Jhoec Camayo"
+      },
+      {
+         "Sprint":"Sprint 1",
+         "Task id":"5",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-03",
+         "Task Status":"Overdue",
+         "Task/Activity":"Presentación workshop técnico",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Jhoec Camayo"
+      },
+      {
+         "Sprint":"Sprint 2",
+         "Task id":"7",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-03",
+         "Task Status":"Overdue",
+         "Task/Activity":"Compartir al cliente los Requisitos para conexión SAP y ServiceNow",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 2",
+         "Task id":"9",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-03",
+         "Task Status":"Overdue",
+         "Task/Activity":"Análisis e Identificación de fuentes de datos ServiceNow",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Jhoec Camayo"
+      },
+      {
+         "Sprint":"Sprint 1",
+         "Task id":"1",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-03",
+         "Task Status":"Overdue",
+         "Task/Activity":"Preparación KOM de negocio",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"María Paula Campos"
+      },
+      {
+         "Sprint":"Sprint 3",
+         "Task id":"19",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-04",
+         "Task Status":"Overdue",
+         "Task/Activity":"Presentación de Mockup",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Dario Peña"
+      },
+      {
+         "Sprint":"Sprint 4",
+         "Task id":"23",
+         "Star Date":"2024-06-05",
+         "Finish Date":"2024-06-06",
+         "Task Status":"Not starter",
+         "Task/Activity":"2da Validación Identificación de Valor (Casos de Uso, Análisis de Causa Raíz & KPIs)",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 3",
+         "Task id":"21",
+         "Star Date":"2024-06-05",
+         "Finish Date":"2024-06-05",
+         "Task Status":"Overdue",
+         "Task/Activity":"1er Validación Identificación de Valor (Casos de Uso, Análisis de Causa Raíz & KPIs)",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 1",
+         "Task id":"2",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-10",
+         "Task Status":"In progress",
+         "Task/Activity":"Presentación KOM de negocio",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"María Paula Campos"
+      },
+      {
+         "Sprint":"Sprint 1",
+         "Task id":"3",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-03",
+         "Task Status":"Overdue",
+         "Task/Activity":"Documento descripción casos de uso",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"María Paula Campos"
+      },
+      {
+         "Sprint":"Sprint 2",
+         "Task id":"10",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-10",
+         "Task Status":"In progress",
+         "Task/Activity":"Ajustes a Conexiones ",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 3",
+         "Task id":"17",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-04",
+         "Task Status":"Stopped",
+         "Task/Activity":"Workshop de Negocio - Caso de Uso 5",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 2",
+         "Task id":"11",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-07",
+         "Task Status":"In progress",
+         "Task/Activity":"Instalación e Interfaces a fuentes de datos (SAP & ServiceNow)",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 2",
+         "Task id":"15",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-08",
+         "Task Status":"Completed",
+         "Task/Activity":"Creación Modelo de Datos Analítico Multidimensional",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      },
+      {
+         "Sprint":"Sprint 4",
+         "Task id":"18",
+         "Star Date":"2024-06-01",
+         "Finish Date":"2024-06-05",
+         "Task Status":"Overdue",
+         "Task/Activity":"Análisis de insights y construcción de Mockup (5 Casos de Uso & 3 Análisis de Causa Raíz) ",
+         "Assignment type":"OFI",
+         "Real finished date":null,
+         "Responsible for the task":"Andres Olarte"
+      }
+   ]
+}
