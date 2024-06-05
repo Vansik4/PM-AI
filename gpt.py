@@ -1,29 +1,42 @@
 import streamlit as st
-from openai import OpenAI
+import openai
 import json
 
 # Título de la aplicación
 st.title("Asistente de Gestión de Proyectos")
 
 # Inicializar el cliente de OpenAI
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
+api_key = "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"
+openai.api_key = api_key
 
 # Función para procesar la respuesta y enriquecerla con información del JSON
-def process_response(response, project_info):
-    if "riesgo" in response.lower() or "risk" in response.lower():
-        for risk in project_info['Risk']:
-            response += f"\n\nRiesgo ID {risk['Risk Id']}: {risk['Description']}"
-            response += f"\nImpacto: {risk['Impact']}"
-            response += f"\nProbabilidad: {risk['Probability']}"
-            response += f"\nEstado: {risk['Risk/Stopper Status']}\n"
-    if "tarea" in response.lower() or "task" in response.lower():
-        for task in project_info['Task']:
-            response += f"\n\nTarea ID {task['Task id']}: {task['Task/Activity']}"
-            response += f"\nSprint: {task['Sprint']}"
-            response += f"\nFecha de inicio: {task['Star Date']}"
-            response += f"\nFecha de finalización: {task['Finish Date']}"
-            response += f"\nEstado de la tarea: {task['Task Status']}"
-            response += f"\nResponsable: {task['Responsible for the task']}\n"
+def process_response(prompt, response, project_info):
+    if "riesgos" in prompt.lower():
+        risks = [
+            f"Riesgo ID {risk['Risk Id']}: {risk['Description']}, Impacto: {risk['Impact']}, Probabilidad: {risk['Probability']}"
+            for risk in project_info['Risk']
+        ]
+        if risks:
+            response = "Riesgos identificados:\n" + "\n".join(risks)
+        else:
+            response = "No hay riesgos identificados."
+    elif "tareas en overdue" in prompt.lower():
+        overdue_tasks = [
+            f"Tarea ID {task['Task id']}: {task['Task/Activity']}, Responsable: {task['Responsible for the task']}"
+            for task in project_info['Task'] if task['Task Status'].lower() == 'overdue'
+        ]
+        if overdue_tasks:
+            response = "Tareas en overdue:\n" + "\n".join(overdue_tasks)
+        else:
+            response = "No hay tareas en overdue."
+    elif "personas involucradas" in prompt.lower() or "nombres de las personas" in prompt.lower():
+        people = set(task['Responsible for the task'] for task in project_info['Task'])
+        if people:
+            response = "Personas involucradas en el proyecto:\n" + "\n".join(people)
+        else:
+            response = "No se encontraron datos de personas involucradas en el proyecto."
+    else:
+        response += "\n"
     return response
 
 # Cargar la configuración del modelo
@@ -40,13 +53,10 @@ for message in st.session_state.messages:
         st.markdown(message["content"])
 
 # Función para cargar el JSON de gestión de proyectos
-@st.cache
+@st.cache_data
 def load_project_management_info():
     with open("risk.json", "r") as f:
         return json.load(f)
-
-# Cargar la información del proyecto
-project_info = load_project_management_info()
 
 # Mostrar un mensaje de bienvenida y descripción
 if not st.session_state.messages:
@@ -63,19 +73,27 @@ if prompt := st.chat_input("Hazme una pregunta sobre la gestión del proyecto"):
     with st.chat_message("user"):
         st.markdown(prompt)
 
+    # Recargar la información del proyecto antes de responder
+    project_info = load_project_management_info()
+
     # Llamar a la API de OpenAI para obtener la respuesta
     with st.chat_message("assistant"):
         messages = [{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
-        stream = client.chat.completions.create(
+        response = openai.chat.completions.create(
             model=st.session_state["openai_model"],
-            messages=messages,
-            stream=True,
+            messages=messages
         )
-        response = "".join([chunk["choices"][0]["delta"]["content"] for chunk in stream])
+        response_text = response.choices[0].message.content
         
         # Enriquecer la respuesta con información del JSON si es necesario
-        response = process_response(response, project_info)
+        response_text = process_response(prompt, response_text, project_info)
         
-        st.markdown(response)
-    st.session_state.messages.append({"role": "assistant", "content": response})
+        st.markdown(response_text)
+    st.session_state.messages.append({"role": "assistant", "content": response_text})
+
+
+
+
+
+
 
