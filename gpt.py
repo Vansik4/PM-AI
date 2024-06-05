@@ -1,12 +1,13 @@
 import streamlit as st
 import openai
 import json
+import requests
 
 # Título de la aplicación
 st.title("Asistente de Gestión de Proyectos")
 
 # Inicializar el cliente de OpenAI
-api_key = "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"
+api_key = "sk-proj-mHFAcE7C4GBwsxOjgDtdT3BlbkFJlkHiAMj00dZVSreuZR2W"
 openai.api_key = api_key
 
 # Función para procesar la respuesta y enriquecerla con información del JSON
@@ -52,11 +53,17 @@ for message in st.session_state.messages:
     with st.chat_message(message["role"]):
         st.markdown(message["content"])
 
-# Función para cargar el JSON de gestión de proyectos
 @st.cache_data
-def load_project_management_info():
-    with open("risk.json", "r") as f:
-        return json.load(f)
+def load_project_management_info(url):
+    response = requests.get(url)
+    response.raise_for_status()  # Para manejar errores de HTTP
+    return response.json()
+
+# URL del archivo JSON en GitHub
+json_url = "https://raw.githubusercontent.com/Vansik4/PM-AI/main/risk.json"
+
+# Cargar la información del proyecto
+project_info = load_project_management_info(json_url)
 
 # Mostrar un mensaje de bienvenida y descripción
 if not st.session_state.messages:
@@ -74,7 +81,7 @@ if prompt := st.chat_input("Hazme una pregunta sobre la gestión del proyecto"):
         st.markdown(prompt)
 
     # Recargar la información del proyecto antes de responder
-    project_info = load_project_management_info()
+    project_info = load_project_management_info(json_url)
 
     # Llamar a la API de OpenAI para obtener la respuesta
     with st.chat_message("assistant"):
