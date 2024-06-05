@@ -42,7 +42,7 @@ for message in st.session_state.messages:
 # Función para cargar el JSON de gestión de proyectos
 @st.cache
 def load_project_management_info():
-    with open("project_info.json", "r") as f:
+    with open("risk.json", "r") as f:
         return json.load(f)
 
 # Cargar la información del proyecto
