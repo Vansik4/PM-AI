@@ -1,5 +1,5 @@
 import streamlit as st
-import openai
+from openai import OpenAI
 import json
 import requests
 
@@ -7,8 +7,7 @@ import requests
 st.title("Asistente de Gestión de Proyectos")
 
 # Inicializar el cliente de OpenAI
-api_key = "sk-proj-mHFAcE7C4GBwsxOjgDtdT3BlbkFJlkHiAMj00dZVSreuZR2W"
-openai.api_key = api_key
+client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Función para procesar la respuesta y enriquecerla con información del JSON
 def process_response(prompt, response, project_info):
@@ -86,7 +85,7 @@ if prompt := st.chat_input("Hazme una pregunta sobre la gestión del proyecto"):
     # Llamar a la API de OpenAI para obtener la respuesta
     with st.chat_message("assistant"):
         messages = [{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
-        response = openai.chat.completions.create(
+        response = client.chat.completions.create(
             model=st.session_state["openai_model"],
             messages=messages
         )
