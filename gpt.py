@@ -1,62 +1,45 @@
 import streamlit as st
-from openai import OpenAI
+import openai
 import json
 import requests
 
-# Título de la aplicación
-st.title("Asistente de Gestión de Proyectos")
+# Set up the page configuration
+st.set_page_config(layout="wide")
+
+# Title of the application
+col1, col2 = st.columns([1, 3])
+with col1:
+    st.image("https://media.licdn.com/dms/image/D4E0BAQFhl8GfNZYDxA/company-logo_200_200/0/1706815368525/ofi_services_logo?e=2147483647&v=beta&t=FR0iH1wUKQ3lCpMo0iV0typjRqasEJHovu17g0Mi8bE", caption="Project Management")
+
+with col2:
+    st.title("Project Management Assistant")
 
 # Inicializar el cliente de OpenAI
-client = OpenAI(api_key=st.secrets["OPENAI_API_KEY"])
 
-# Función para procesar la respuesta y enriquecerla con información del JSON
-def process_response(prompt, response, project_info):
-    if "riesgos" in prompt.lower():
-        risks = [
-            f"Riesgo ID {risk['Risk Id']}: {risk['Description']}, Impacto: {risk['Impact']}, Probabilidad: {risk['Probability']}"
-            for risk in project_info['Risk']
-        ]
-        if risks:
-            response = "Riesgos identificados:\n" + "\n".join(risks)
-        else:
-            response = "No hay riesgos identificados."
-    elif "tareas en overdue" in prompt.lower():
-        overdue_tasks = [
-            f"Tarea ID {task['Task id']}: {task['Task/Activity']}, Responsable: {task['Responsible for the task']}"
-            for task in project_info['Task'] if task['Task Status'].lower() == 'overdue'
-        ]
-        if overdue_tasks:
-            response = "Tareas en overdue:\n" + "\n".join(overdue_tasks)
-        else:
-            response = "No hay tareas en overdue."
-    elif "personas involucradas" in prompt.lower() or "nombres de las personas" in prompt.lower():
-        people = set(task['Responsible for the task'] for task in project_info['Task'])
-        if people:
-            response = "Personas involucradas en el proyecto:\n" + "\n".join(people)
-        else:
-            response = "No se encontraron datos de personas involucradas en el proyecto."
-    else:
-        response += "\n"
-    return response
+client = openai(api_key=st.secrets["OPENAI_API_KEY"])
 
 # Cargar la configuración del modelo
 if "openai_model" not in st.session_state:
-    st.session_state["openai_model"] = "gpt-3.5-turbo"
+    st.session_state["openai_model"] = "gpt-4o"
 
 # Inicializar los mensajes de la conversación
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Mostrar mensajes previos en el chat
-for message in st.session_state.messages:
-    with st.chat_message(message["role"]):
-        st.markdown(message["content"])
-
+# Función para cargar el JSON de gestión de proyectos desde GitHub
 @st.cache_data
 def load_project_management_info(url):
     response = requests.get(url)
-    response.raise_for_status()  # Para manejar errores de HTTP
-    return response.json()
+    
+    if response.status_code != 200:
+        st.error(f"Error al obtener el JSON: {response.status_code}")
+        st.stop()
+
+    try:
+        return response.json()
+    except json.JSONDecodeError as e:
+        st.error(f"Error al decodificar JSON: {e.msg}")
+        st.stop()
 
 # URL del archivo JSON en GitHub
 json_url = "https://raw.githubusercontent.com/Vansik4/PM-AI/main/risk.json"
@@ -64,23 +47,40 @@ json_url = "https://raw.githubusercontent.com/Vansik4/PM-AI/main/risk.json"
 # Cargar la información del proyecto
 project_info = load_project_management_info(json_url)
 
-# Mostrar un mensaje de bienvenida y descripción
-if not st.session_state.messages:
-    welcome_message = ("Soy un asistente virtual especializado en gestión de proyectos. "
-                       "Puedes hacerme preguntas sobre el manejo del proyecto, "
-                       "fechas importantes, miembros del equipo, presupuesto y más.")
-    st.session_state.messages.append({"role": "assistant", "content": welcome_message})
-    with st.chat_message("assistant"):
-        st.markdown(welcome_message)
+# Convertir el JSON en una cadena de texto
+project_info_text = json.dumps(project_info, indent=2)
 
-# Manejar el input del usuario
-if prompt := st.chat_input("Hazme una pregunta sobre la gestión del proyecto"):
+# Crear un prompt inicial personalizado
+initial_prompt = (
+    "You are a project management analyst and you will only answer questions about the following:\n"
+    f"{project_info_text}\n"
+    "Please respond to questions based solely on the information provided."
+)
+
+# Show a welcome message and description
+if not st.session_state.messages:
+    st.session_state.messages.append({"role": "system", "content": initial_prompt})
+    with st.chat_message("assistant"):
+        st.markdown("I am a virtual assistant specializing in project management. "
+                    "You can ask me questions about project management, "
+                    "important dates, team members, budget, and more.")
+
+# Display chat history
+st.header("Chat History")
+for message in st.session_state.messages:
+    if message["role"] == "user":
+        with st.chat_message("user"):
+            st.markdown(message["content"])
+    elif message["role"] == "assistant":
+        with st.chat_message("assistant"):
+            st.markdown(message["content"])
+
+# Handle user input
+if prompt := st.chat_input("Ask me a question about project management"):
     st.session_state.messages.append({"role": "user", "content": prompt})
     with st.chat_message("user"):
         st.markdown(prompt)
 
-    # Recargar la información del proyecto antes de responder
-    project_info = load_project_management_info(json_url)
 
     # Llamar a la API de OpenAI para obtener la respuesta
     with st.chat_message("assistant"):
@@ -90,16 +90,7 @@ if prompt := st.chat_input("Hazme una pregunta sobre la gestión del proyecto"):
             messages=messages
         )
         response_text = response.choices[0].message.content
-        
-        # Enriquecer la respuesta con información del JSON si es necesario
-        response_text = process_response(prompt, response_text, project_info)
-        
+        # Mostrar la respuesta del asistente
         st.markdown(response_text)
     st.session_state.messages.append({"role": "assistant", "content": response_text})
-
-
-
-
-
-
 
