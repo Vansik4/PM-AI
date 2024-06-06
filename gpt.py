@@ -52,7 +52,7 @@ project_info_text = json.dumps(project_info, indent=2)
 
 # Crear un prompt inicial personalizado
 initial_prompt = (
-    "You are a project management analyst and you will only answer questions about the following:\n"
+    "You are an expert project management analyst and you will only answer questions in English about the following:\n"
     f"{project_info_text}\n"
     "Please respond to questions based solely on the information provided."
 )
