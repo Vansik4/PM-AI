@@ -12,7 +12,7 @@ with col1:
     st.image("https://media.licdn.com/dms/image/D4E0BAQFhl8GfNZYDxA/company-logo_200_200/0/1706815368525/ofi_services_logo?e=2147483647&v=beta&t=FR0iH1wUKQ3lCpMo0iV0typjRqasEJHovu17g0Mi8bE", caption="Project Management")
 
 with col2:
-    st.title("Project Management Assistant")
+    st.title("Ofi Services Project Management Assistant")
 
 # Inicializar el cliente de OpenAI
 
