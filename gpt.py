@@ -16,7 +16,7 @@ with col2:
 
 # Inicializar el cliente de OpenAI
 
-client = openai(api_key=st.secrets["OPENAI_API_KEY"])
+openai.api_key = st.secrets["OPENAI_API_KEY"]
 
 # Cargar la configuración del modelo
 if "openai_model" not in st.session_state:
@@ -85,7 +85,7 @@ if prompt := st.chat_input("Ask me a question about project management"):
     # Llamar a la API de OpenAI para obtener la respuesta
     with st.chat_message("assistant"):
         messages = [{"role": m["role"], "content": m["content"]} for m in st.session_state.messages]
-        response = client.chat.completions.create(
+        response = openai.chat.completions.create(
             model=st.session_state["openai_model"],
             messages=messages
         )
