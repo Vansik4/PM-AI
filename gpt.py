@@ -6,15 +6,18 @@ import requests
 # Set up the page configuration
 st.set_page_config(layout="wide")
 
-# Title of the application
-col1, col2 = st.columns([1, 3])
+
+# Crear las columnas
+col1, col2, col3 = st.columns([1, 4, 1])
+
 with col1:
-    st.image("https://media.licdn.com/dms/image/D4E0BAQFhl8GfNZYDxA/company-logo_200_200/0/1706815368525/ofi_services_logo?e=2147483647&v=beta&t=FR0iH1wUKQ3lCpMo0iV0typjRqasEJHovu17g0Mi8bE", caption="Project Management")
+    st.image("https://res.cloudinary.com/ddmifk9ub/image/upload/v1714666361/OFI/Logos/ofi-black.png", caption="Project Management")
 
 with col2:
     st.title("Ofi Services Project Management Assistant")
 
-# Inicializar el cliente de OpenAI
+with col3:
+    st.image("https://workable-application-form.s3.amazonaws.com/advanced/production/64d24960f1c47278d72ac732/c1862a06-3ce4-9853-b8a1-f3ba25e8a5ee")
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
