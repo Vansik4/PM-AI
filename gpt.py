@@ -8,7 +8,7 @@ st.set_page_config(layout="wide")
 
 
 # Crear las columnas
-col1, col2, col3 = st.columns([1, 4, 1])
+col1, col2 = st.columns([1, 3])
 
 with col1:
     st.image("https://res.cloudinary.com/ddmifk9ub/image/upload/v1714666361/OFI/Logos/ofi-black.png", caption="Project Management")
@@ -16,8 +16,6 @@ with col1:
 with col2:
     st.title("Ofi Services Project Management Assistant")
 
-with col3:
-    st.image("https://workable-application-form.s3.amazonaws.com/advanced/production/64d24960f1c47278d72ac732/c1862a06-3ce4-9853-b8a1-f3ba25e8a5ee")
 
 openai.api_key = st.secrets["OPENAI_API_KEY"]
 
@@ -96,4 +94,3 @@ if prompt := st.chat_input("Ask me a question about project management"):
         # Mostrar la respuesta del asistente
         st.markdown(response_text)
     st.session_state.messages.append({"role": "assistant", "content": response_text})
-
